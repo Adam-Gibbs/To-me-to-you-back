@@ -42,13 +42,13 @@ function getPath(id) {
 }
 
 const upload = async (req, res) => {
-  console.log("upload", req.file);
+  console.log("upload");
   try {
     fileId = Str.random(30)
-    const dir = "."+uploadsFolder+fileId+"/";
+    const dir = __basedir+"/"+uploadsFolder+fileId+"/";
     await fs.mkdir(dir, (err) => {
       if (err) {
-          throw err;
+        console.log(err);
       }
     });
     await uploadFileMiddleware(req, res);
