@@ -25,6 +25,7 @@ let uploadFile = multer({
 let uploadFileMiddleware = util.promisify(uploadFile);
 
 async function getFile(id) {
+  console.log("getFile", id);
   const path = getPath(id);
   const file = await fs.readdir(path, function (err, files) {
     //handling error
@@ -36,10 +37,12 @@ async function getFile(id) {
 }
 
 function getPath(id) {
+  console.log("getPath", id);
   return __basedir + uploadsFolder + id + "/";
 }
 
 const upload = async (req, res) => {
+  console.log("upload", req.file);
   try {
     fileId = Str.random(30)
     const dir = "."+uploadsFolder+fileId+"/";
@@ -58,6 +61,7 @@ const upload = async (req, res) => {
       url: fileId
     });
   } catch (err) {
+    console.log(err);
     if (err.code == "LIMIT_FILE_SIZE") {
       return res.status(500).send({
         message: "File size cannot be larger than 5GB!",
@@ -69,6 +73,7 @@ const upload = async (req, res) => {
 };
 
 const getDetails = async (req, res) => {
+  console.log("getDetails", req.params.id);
   try {
     const fileId = req.params.id;
     const fileName = await getFile(fileId);

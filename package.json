@@ -1,6 +1,6 @@
 {
   "name": "to-me-to-you-back",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "dependencies": {
     "@supercharge/strings": "^1.28.0",
     "cors": "^2.8.5",
