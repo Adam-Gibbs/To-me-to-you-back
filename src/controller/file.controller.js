@@ -41,14 +41,13 @@ function getPath(id) {
 
 const upload = async (req, res) => {
   try {
-    fileId = Str.random(30)  
-    const fs = require('fs');
+    fileId = Str.random(30)
     const dir = "."+uploadsFolder+fileId+"/";
-    fs.mkdir(dir, (err) => {
+    await fs.mkdir(dir, (err) => {
       if (err) {
           throw err;
       }
-  });
+    });
     await uploadFileMiddleware(req, res);
 
     if (req.file == undefined) {
